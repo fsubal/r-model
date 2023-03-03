@@ -1,6 +1,7 @@
-import React, { useState, useMemo, useCallback } from 'react'
+import React, { useId, useState, useMemo, useCallback } from 'react'
 
 export interface Model<T, E = Error> {
+  id: string
   value: T
   error: E | null
   isValid: boolean
@@ -9,6 +10,7 @@ export interface Model<T, E = Error> {
 }
 
 export function useModel<T, E = Error>(defaultValue: T, parser: (value: unknown) => T): Model<T, E> {
+  const id = useId()
   const [value, setValue] = useState(defaultValue)
 
   const error = useMemo(() => {
@@ -34,12 +36,13 @@ export function useModel<T, E = Error>(defaultValue: T, parser: (value: unknown)
 
   return useMemo(
     () => ({
+      id,
       value,
       error,
       isValid: error == null,
       setValue,
       onChange,
     }),
-    [error, onChange, value],
+    [id, error, onChange, value],
   )
 }
