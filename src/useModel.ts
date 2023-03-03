@@ -1,6 +1,14 @@
-import { useState, useMemo, useCallback } from 'react'
+import React, { useState, useMemo, useCallback } from 'react'
 
-export function useModel<T>(defaultValue: T, parser: (value: unknown) => T) {
+export interface Model<T, E = Error> {
+  value: T
+  error: E | null
+  isValid: boolean
+  setValue: React.Dispatch<T>
+  onChange: React.ChangeEventHandler<{ value: string }>
+}
+
+export function useModel<T, E = Error>(defaultValue: T, parser: (value: unknown) => T): Model<T, E> {
   const [value, setValue] = useState(defaultValue)
 
   const error = useMemo(() => {
