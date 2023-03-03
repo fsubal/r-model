@@ -9,7 +9,7 @@ You need a minimal state management, mostly for `<form>`, but not an opinionated
 ### How to use
 
 ```
-npm install @fsubal/r-m
+npm install @fsubal/r-model
 ```
 
 write how to use
