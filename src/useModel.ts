@@ -40,6 +40,6 @@ export function useModel<T, E = Error>(defaultValue: T, parser: (value: unknown)
       setValue,
       onChange,
     }),
-    [isValid, onChange, value],
+    [error, onChange, value],
   )
 }
