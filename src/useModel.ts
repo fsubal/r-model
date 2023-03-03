@@ -3,11 +3,17 @@ import { useState, useMemo, useCallback } from 'react'
 export function useModel<T>(defaultValue: T, parser: (value: unknown) => T) {
   const [value, setValue] = useState(defaultValue)
 
-  const isValid = useMemo(() => {
+  const error = useMemo(() => {
     try {
-      return parser(value) === value
-    } catch {
-      return false
+      const parsed = parser(value)
+      if (parsed !== value) {
+        // TODO: support i18n
+        throw new TypeError(`${value} is invalid`)
+      }
+
+      return null
+    } catch(e: unknown) {
+      return e
     }
   }, [parser, value])
 
@@ -21,7 +27,8 @@ export function useModel<T>(defaultValue: T, parser: (value: unknown) => T) {
   return useMemo(
     () => ({
       value,
-      isValid,
+      error,
+      isValid: error == null,
       setValue,
       onChange,
     }),
