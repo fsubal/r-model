@@ -3,22 +3,13 @@ import { useModel } from './useModel'
 
 function parse(value: unknown): boolean {
   switch(value) {
-    case false:
-    case '':
     case 'false':
-    case 0:
-    case -0:
-    case 0n:
-    case '0':
-    case null:
-    case undefined:
-    case NaN:
-    {
+    case '0': {
       return false
     }
 
     default: {
-      return true
+      return Boolean(value)
     }
   }
 }
