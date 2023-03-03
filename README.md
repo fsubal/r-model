@@ -1,15 +1,15 @@
-# package-name
+# @fsubal/r-model
 
-description
+Set of React hooks that works like `v-model` in Vue.js
 
 ### Why?
 
-motivation
+You need a minimal state management, mostly for `<form>`, but not an opinionated Form components.
 
 ### How to use
 
 ```
-npm install package-name
+npm install @fsubal/r-m
 ```
 
 write how to use
